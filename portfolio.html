@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Your Name | Tech Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Sora', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'primary': {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'fade-in-down': 'fadeInDown 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                            '50%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.8)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        /* Grid Pattern Background */
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Dynamic Island Navbar */
+        #navbar {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #navbarContainer {
+            max-width: 1200px;
+            padding: 0 1rem;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #navbarContainer.compact {
+            max-width: 180px;
+            padding: 0;
+        }
+
+        #navbarInner {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        #navbarInner:hover {
+            box-shadow: 
+                0 12px 48px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(59, 130, 246, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+        }
+
+        #desktopMenu {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #navbarContainer.compact #desktopMenu {
+            opacity: 0;
+            max-width: 0;
+            overflow: hidden;
+        }
+
+        #navbarContainer.compact:hover #desktopMenu {
+            opacity: 1;
+            max-width: 600px;
+        }
+
+        /* Animated Background Orbs */
+        @keyframes moveOrb1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 50px); }
+        }
+        @keyframes moveOrb2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-80px, -40px); }
+        }
+        .orb-1 {
+            animation: moveOrb1 20s ease-in-out infinite;
+        }
+        .orb-2 {
+            animation: moveOrb2 15s ease-in-out infinite;
+        }
+
+        /* Mobile Menu Animation */
+        #mobileMenu {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Dynamic Island Navbar -->
+    <nav id="navbar" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4">
+        <div id="navbarContainer" class="mx-auto">
+            <div id="navbarInner" class="bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-full px-6 py-3.5">
+                <div class="flex justify-between items-center gap-8">
+                    <!-- Logo -->
+                    <a href="#home" class="flex items-center flex-shrink-0">
+                        <div class="font-mono text-lg font-bold">
+                            <span class="text-cyan-400">&lt;</span>
+                            <span class="text-white">GanendraJawa</span>
+                            <span class="text-cyan-400">/&gt;</span>
+                        </div>
+                    </a>
+
+                    <!-- Desktop Menu -->
+                    <ul id="desktopMenu" class="hidden md:flex items-center space-x-1">
+                        <li><a href="#home" class="nav-link px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-sm">Home</a></li>
+                        <li><a href="#about" class="nav-link px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-sm">About</a></li>
+                        <li><a href="#skills" class="nav-link px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-sm">Skills</a></li>
+                        <li><a href="#projects" class="nav-link px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-sm">Projects</a></li>
+                        <li><a href="#certificates" class="nav-link px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-sm">Certificates</a></li>
+                        <li><a href="#contact" class="nav-link px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-sm">Contact</a></li>
+                    </ul>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden text-white focus:outline-none flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-lg transition-all">
+                        <i id="menuIcon" class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden mt-3 max-w-sm mx-auto">
+            <div class="bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
+                <ul class="py-2">
+                    <li><a href="#home" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">Home</a></li>
+                    <li><a href="#about" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">About</a></li>
+                    <li><a href="#skills" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">Skills</a></li>
+                    <li><a href="#projects" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">Projects</a></li>
+                    <li><a href="#certificates" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">Certificates</a></li>
+                    <li><a href="#contact" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 grid-bg">
+            <div class="absolute top-20 right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl orb-1"></div>
+            <div class="absolute bottom-20 left-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl orb-2"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="space-y-6 animate-fade-in-up">
+                    <div class="inline-block">
+                        <span class="text-blue-600 font-mono text-sm font-semibold tracking-wider">
+                            // Selamat datang di portfolio saya
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                        <span class="text-slate-900">Halo, Saya</span>
+                        <br/>
+                        <span class="gradient-text">Ganendra Jawa Ramadhan</span>
+                    </h1>
+
+                    <div class="flex items-center gap-3 text-lg font-medium text-slate-600">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full">Tech Enthusiast</span>
+                        <span class="text-slate-400">|</span>
+                        <span class="px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full">Web & IoT Developer</span>
+                    </div>
+
+                    <p class="text-xl text-slate-600 leading-relaxed max-w-xl">
+                        Membangun solusi digital yang inovatif melalui web development, 
+                        Internet of Things, dan software engineering
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <!-- <a href="#" download class="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1">
+                            <i class="fas fa-download"></i>
+                            Download CV
+                        </a> -->
+                        <a href="#contact" class="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1">
+                            <i class="fas fa-envelope"></i>
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Code Window Visual -->
+                <div class="relative animate-fade-in">
+                    <div class="bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
+                        <!-- Window Header -->
+                        <div class="flex items-center gap-2 px-4 py-3 bg-slate-800 border-b border-slate-700">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="ml-4 text-sm font-mono text-slate-400">portfolio.js</span>
+                        </div>
+                        
+                        <!-- Code Content -->
+                        <div class="p-6 font-mono text-sm">
+                            <pre class="text-slate-300"><code><span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {
+  <span class="text-cyan-400">name</span>: <span class="text-green-400">"Ganendra Jawa Ramadhan"</span>,
+  <span class="text-cyan-400">role</span>: <span class="text-green-400">"Backend Developer"</span>,
+  <span class="text-cyan-400">skills</span>: [
+    <span class="text-green-400">"Web Development"</span>,
+    <span class="text-green-400">"IoT Solutions"</span>,
+    <span class="text-green-400">"Software Engineering"</span>
+  ],
+  <span class="text-cyan-400">technologies</span>: {
+    <span class="text-pink-400">frontend</span>: [<span class="text-green-400">"React Js"</span>, <span class="text-green-400">"Tailwind CSS"</span>],
+    <span class="text-pink-400">backend</span>: [<span class="text-green-400">"Laravel"</span>, <span class="text-green-400">"Node.js"</span>],
+    <span class="text-pink-400">iot</span>: [<span class="text-green-400">"ESP32"</span>, <span class="text-green-400">"MQTT"</span>]
+  },
+  <span class="text-cyan-400">status</span>: <span class="text-green-400">"Building the future ✨"</span>
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-blue-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center animate-float">
+                        <i class="fas fa-code text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-cyan-500/20 rounded-2xl backdrop-blur-sm border border-cyan-500/30 flex items-center justify-center animate-float" style="animation-delay: 1s;">
+                        <i class="fas fa-microchip text-2xl text-cyan-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-blue-600 rounded-full flex justify-center">
+                <div class="w-1 h-2 bg-blue-600 rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-mono text-sm font-semibold tracking-wider uppercase">Tentang Saya</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-2 text-slate-900">About Me</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Profile Image -->
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl opacity-20 group-hover:opacity-30 transition duration-500 blur-xl"></div>
+                    <div class="relative aspect-square rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
+                        <img src="assets/profile.jpeg" 
+                             alt="Profile" 
+                             class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                    </div>
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-3xl text-blue-600"></i>
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-cyan-500/20 rounded-2xl backdrop-blur-sm border border-cyan-500/30 flex items-center justify-center">
+                        <i class="fas fa-rocket text-3xl text-cyan-600"></i>
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div class="space-y-6">
+                    <p class="text-xl text-slate-700 leading-relaxed">
+                    Halo! Nama saya <span class="font-semibold text-blue-600">Ganendra Jawa Ramadhan</span>, 
+                    seorang siswa di <span class="font-semibold">SMK Telkom Sidoarjo</span> yang memiliki 
+                    minat besar di bidang teknologi dan IT, dengan fokus pada pengembangan web, 
+                    Internet of Things (IoT), dan software development.
+                </p>
+
+                <!-- <p class="text-lg text-slate-600 leading-relaxed">
+                    Bagi saya, programming bukan sekadar menulis baris kode, tetapi tentang 
+                    memecahkan masalah nyata, menciptakan solusi yang bermanfaat, serta terus 
+                    mengembangkan kemampuan diri. Ketertarikan inilah yang mendorong saya untuk 
+                    terus belajar dan mencoba hal-hal baru di dunia teknologi.
+                </p> -->
+
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Saat ini saya aktif mengasah kemampuan dalam pengembangan web dan perangkat lunak, 
+                    mulai dari membangun web application yang responsif, mengintegrasikan perangkat IoT 
+                    dengan berbagai teknologi pendukung, hingga mengembangkan aplikasi yang fungsional 
+                    dan ramah pengguna. Setiap project bagi saya adalah kesempatan untuk belajar dan berkembang.
+                </p>
+
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 pt-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-blue-600">15+</div>
+                            <div class="text-sm text-slate-600 font-medium mt-1">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-blue-600">10+</div>
+                            <div class="text-sm text-slate-600 font-medium mt-1">Technologies</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-blue-600">5+</div>
+                            <div class="text-sm text-slate-600 font-medium mt-1">Certificates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="min-h-screen flex items-center bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 grid-bg opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="text-blue-400 font-mono text-sm font-semibold tracking-wider uppercase">Keahlian</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-2">Skills & Technologies</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-code text-2xl text-blue-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Programming Languages</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">HTML & CSS</span>
+                                <span class="text-blue-400">90%</span>
+                            </div>
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">JavaScript</span>
+                                <span class="text-blue-400">70%</span>
+                            </div>
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">PHP</span>
+                                <span class="text-blue-400">80%</span>
+                            </div>
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Python</span>
+                                <span class="text-blue-400">50%</span>
+                            </div>
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        
+                        
+                      
+                    </div>
+                </div>
+
+                <!-- Frameworks & Libraries -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-layer-group text-2xl text-cyan-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Frameworks & Libraries</h3>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-cyan-500 transition-all">Laravel</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-cyan-500 transition-all">Node.js</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-cyan-500 transition-all">React Native</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-cyan-500 transition-all">Express.js</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-cyan-500 transition-all">Bootstrap</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-cyan-500 transition-all">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Tools & Technologies -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-tools text-2xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Tools & Technologies</h3>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-purple-500 transition-all">Git & GitHub</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-purple-500 transition-all">MySQL</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-purple-500 transition-all">MQTT</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-purple-500 transition-all">PlatformIO</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-purple-500 transition-all">ESP32/ESP8266</span>
+                        <span class="px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-sm font-medium hover:bg-slate-700 hover:border-purple-500 transition-all">VS Code</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-mono text-sm font-semibold tracking-wider uppercase">Project</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-2 text-slate-900">Featured Projects</h2>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <!-- <button class="filter-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300 bg-blue-600 text-white shadow-lg shadow-blue-500/30" data-filter="all">
+                    All Projects
+                </button> -->
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 - Web App -->
+                <div class="project-card group" data-category="web">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="assets/seaweed.png" 
+                                 alt="Project 1" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-3">IoT Solution</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Smart Seaweed Farming</h3>
+                            <p class="text-slate-600 mb-4">Mengembangkan sistem pemantauan kualitas air berbasis IoT untuk budidaya rumput laut.
+</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">C++</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">MySQL</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">ESP32</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 - IoT -->
+                <div class="project-card group" data-category="iot">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="assets/smartnote.png" 
+                                 alt="Project 2" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full mb-3">IoT Solution</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Smartnote</h3>
+                            <p class="text-slate-600 mb-4">Perekam suara cerdas yang membantu guru menghasilkan materi pembelajaran terstruktur dengan bantuan AI.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">ESP32</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">Flask</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 - Mobile -->
+                <div class="project-card group" data-category="mobile">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="assets/gloair.png" 
+                                 alt="Project 3" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full mb-3">Mobile App</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Mobile App for GloAir</h3>
+                            <p class="text-slate-600 mb-4">Aplikasi mobile untuk memonitoring dan kontrol perangkat IoT kualitas udara di lingkungan sekitar.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">React Native</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">Node JS</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">MQTT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 - Web -->
+                <div class="project-card group" data-category="web">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="assets/ukl2.png" 
+                                 alt="Project 4" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-3">Web Application</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Coffee Shop Website</h3>
+                            <p class="text-slate-600 mb-4">Pengembangan web app pemesanan kafe yang memungkinkan pemesanan online dan pengelolaan pesanan.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">Laravel</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 - IoT -->
+                <div class="project-card group" data-category="iot">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="assets/tubal.jpeg" 
+                                 alt="Project 5" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full mb-3">IoT Solutions</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Tube Thickness Measurement</h3>
+                            <p class="text-slate-600 mb-4">Mengembangkan sistem IoT untuk mengukur ketebalan tube kemasan farmasi dan mencatat data otomatis.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">C++</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">Spreadsheet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 - Mobile -->
+                <div class="project-card group" data-category="mobile">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="assets/ukl.png" 
+                                 alt="Project 6" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-lg transform hover:scale-110">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full mb-3">Web App</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Ticket Booking System</h3>
+                            <p class="text-slate-600 mb-4">Sistem pemesanan tiket berbasis web dengan fitur pencarian, pembayaran, dan manajemen tiket.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">PHP</span>
+                                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-lg">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 grid-bg opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="text-blue-400 font-mono text-sm font-semibold tracking-wider uppercase">Pencapaian</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-2">Certificates & Awards</h2>
+            </div>
+
+            <!-- Certificates Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certificate 1 -->
+                <div class="certificate-item group cursor-pointer" data-image="https://via.placeholder.com/800x600/1e40af/ffffff?text=Web+Development+Certificate">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="assets/sertif6.png" 
+                                 alt="Certificate 1" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-certificate text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Samsung Innovation Campus - Finalist</h3>
+                            <p class="text-slate-400 text-sm mb-1">Samsung Indonesia</p>
+                            <p class="text-slate-500 text-sm">May 2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 2 -->
+                <div class="certificate-item group cursor-pointer" data-image="https://via.placeholder.com/800x600/1e40af/ffffff?text=IoT+Competition+Award">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-500/20 hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="assets/sertif3.jpg" 
+                                 alt="Certificate 2" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-trophy text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-yellow-400 transition-colors">Inspire IoT Competition - 2nd Place</h3>
+                            <p class="text-slate-400 text-sm mb-1">Universitas Gajah Mada</p>
+                            <p class="text-slate-500 text-sm">November 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 -->
+                <div class="certificate-item group cursor-pointer" data-image="https://via.placeholder.com/800x600/1e40af/ffffff?text=Flutter+Certificate">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20 hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="assets/sertif2.png" 
+                                 alt="Certificate 3" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-certificate text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">Sefest Web Development Competition</h3>
+                            <p class="text-slate-400 text-sm mb-1">Telkom University Surabaya</p>
+                            <p class="text-slate-500 text-sm">July 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 4 -->
+                <div class="certificate-item group cursor-pointer" data-image="https://via.placeholder.com/800x600/1e40af/ffffff?text=Cloud+Computing">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="assets/sertif7.png" 
+                                 alt="Certificate 4" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-certificate text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Ionic IoT Innovation</h3>
+                            <p class="text-slate-400 text-sm mb-1">PENS Surabaya</p>
+                            <p class="text-slate-500 text-sm">December 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 5 -->
+                <div class="certificate-item group cursor-pointer" data-image="https://via.placeholder.com/800x600/1e40af/ffffff?text=Hackathon+Winner">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700 hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="assets/sertif5.png" 
+                                 alt="Certificate 5" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-star text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">Digicourse Cyber Security</h3>
+                            <p class="text-slate-400 text-sm mb-1">Yayasan Pendidikan Telkom</p>
+                            <p class="text-slate-500 text-sm">February 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-item group cursor-pointer" data-image="https://via.placeholder.com/800x600/1e40af/ffffff?text=Database+Design">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20 hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="assets/sertif4.png" 
+                                 alt="Certificate 6" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-certificate text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">Azure AI Fundamental</h3>
+                            <p class="text-slate-400 text-sm mb-1">Elevate Indonesia</p>
+                            <p class="text-slate-500 text-sm">September 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-mono text-sm font-semibold tracking-wider uppercase">Hubungi Saya</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-2 text-slate-900">Get In Touch</h2>
+            </div>
+
+            <!-- Contact Content -->
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">Mari Berkolaborasi!</h3>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Punya project menarik atau ingin berdiskusi tentang teknologi? 
+                        Jangan ragu untuk menghubungi saya. Saya selalu terbuka untuk 
+                        peluang kolaborasi dan pembelajaran baru.
+                    </p>
+                </div>
+
+                <!-- Contact Details Grid -->
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <div class="flex flex-col items-center text-center p-6 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all duration-300 hover:-translate-y-1">
+                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                            <i class="fas fa-envelope text-blue-600 text-2xl"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-500 mb-2">Email</p>
+                        <a href="mailto:ganendrajawara0@gmail.com" class="text-slate-900 font-medium hover:text-blue-600 transition-colors">ganendrajawara0@gmail.com</a>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all duration-300 hover:-translate-y-1">
+                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                            <i class="fas fa-phone text-blue-600 text-2xl"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-500 mb-2">Phone</p>
+                        <a href="tel:+6281232805606" class="text-slate-900 font-medium hover:text-blue-600 transition-colors">+62 812-3280-5606</a>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all duration-300 hover:-translate-y-1">
+                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                            <i class="fas fa-map-marker-alt text-blue-600 text-2xl"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-500 mb-2">Location</p>
+                        <p class="text-slate-900 font-medium">Indonesia</p>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="text-center">
+                    <p class="text-sm font-semibold text-slate-500 mb-6">Follow Me</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="https://github.com/ganendra0" target="_blank" class="w-14 h-14 bg-slate-900 hover:bg-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ganendra-jawa-79a366293/" target="_blank" class="w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="https://www.instagram.com/ganendra_610/" target="_blank" class="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-center md:text-left">
+                    <p class="text-slate-400">
+                        &copy; 2026 <span class="font-bold text-white">Ganendra Jawa Ramadhan</span>                    </p>
+                </div>
+                <div>
+                    <a href="#home" class="text-slate-400 hover:text-white transition-colors font-medium">
+                        <i class="fas fa-arrow-up mr-2"></i>Back to Top
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full">
+            <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+            <img id="modalImage" src="" alt="Certificate" class="w-full round
