@@ -201,7 +201,7 @@
     <!-- Dynamic Island Navbar -->
     <nav id="navbar" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4">
         <div id="navbarContainer" class="mx-auto">
-            <div id="navbarInner" class="bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-full px-6 py-3.5">
+            <div id="navbarInner" class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-full px-6 py-3.5">
                 <div class="flex justify-between items-center gap-8">
                     <!-- Logo -->
                     <a href="#home" class="flex items-center flex-shrink-0">
@@ -232,7 +232,7 @@
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobileMenu" class="hidden md:hidden mt-3 max-w-sm mx-auto">
-            <div class="bg-slate-900/95 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
                 <ul class="py-2">
                     <li><a href="#home" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">Home</a></li>
                     <li><a href="#about" class="mobile-link block px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium">About</a></li>
@@ -246,46 +246,42 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
         <!-- Animated Background -->
         <div class="absolute inset-0 grid-bg">
             <div class="absolute top-20 right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl orb-1"></div>
             <div class="absolute bottom-20 left-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl orb-2"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <!-- Hero Content -->
-                <div class="space-y-6 animate-fade-in-up">
+                <div class="space-y-4 md:space-y-6 animate-fade-in-up text-center md:text-left">
                     <div class="inline-block">
-                        <span class="text-blue-600 font-mono text-sm font-semibold tracking-wider">
+                        <span class="text-blue-600 font-mono text-xs sm:text-sm font-semibold tracking-wider">
                             // Selamat datang di portfolio saya
                         </span>
                     </div>
                     
-                    <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
                         <span class="text-slate-900">Halo, Saya</span>
                         <br/>
                         <span class="gradient-text">Ganendra Jawa Ramadhan</span>
                     </h1>
 
-                    <div class="flex items-center gap-3 text-lg font-medium text-slate-600">
-                        <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full">Tech Enthusiast</span>
-                        <span class="text-slate-400">|</span>
-                        <span class="px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full">Software & IoT Developer</span>
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-sm sm:text-base md:text-lg font-medium text-slate-600">
+                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm md:text-base">Tech Enthusiast</span>
+                        <span class="text-slate-400 hidden sm:inline">|</span>
+                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-cyan-100 text-cyan-700 rounded-full text-xs sm:text-sm md:text-base">Software & IoT Developer</span>
                     </div>
 
-                    <p class="text-xl text-slate-600 leading-relaxed max-w-xl">
+                    <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0">
                         Membangun solusi digital yang inovatif melalui web development, 
                         Internet of Things, dan software engineering
                     </p>
 
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <!-- <a href="#" download class="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1">
-                            <i class="fas fa-download"></i>
-                            Download CV
-                        </a> -->
-                        <a href="#contact" class="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4 justify-center md:justify-start">
+                        <a href="#contact" class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 text-sm sm:text-base">
                             <i class="fas fa-envelope"></i>
                             Contact Me
                         </a>
@@ -293,7 +289,7 @@
                 </div>
 
                 <!-- Code Window Visual -->
-                <div class="relative animate-fade-in">
+                <div class="relative animate-fade-in hidden md:block">
                     <div class="bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
                         <!-- Window Header -->
                         <div class="flex items-center gap-2 px-4 py-3 bg-slate-800 border-b border-slate-700">
@@ -337,7 +333,7 @@
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
             <div class="w-6 h-10 border-2 border-blue-600 rounded-full flex justify-center">
                 <div class="w-1 h-2 bg-blue-600 rounded-full mt-2 animate-pulse"></div>
             </div>
@@ -416,7 +412,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="min-h-screen flex items-center bg-slate-900 text-white relative overflow-hidden">
+    <section id="skills" class="py-16 md:py-24 bg-slate-900 text-white relative overflow-hidden">
         <!-- Background Pattern -->
         <div class="absolute inset-0 grid-bg opacity-10"></div>
         
@@ -937,4 +933,11 @@
             <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors">
                 <i class="fas fa-times text-3xl"></i>
             </button>
-            <img id="modalImage" src="" alt="Certificate" class="w-full round
+            <img id="modalImage" src="" alt="Certificate" class="w-full rounded-2xl shadow-2xl">
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

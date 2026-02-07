@@ -5,35 +5,8 @@ const desktopMenu = document.getElementById('desktopMenu');
 let lastScroll = 0;
 let hoverTimeout;
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        // Scrolled - Compact Dynamic Island Mode
-        navbarContainer.classList.add('compact');
-    } else {
-        // At top - Expanded Mode
-        navbarContainer.classList.remove('compact');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// Hover effect on navbar when scrolled (show menu temporarily)
-navbarContainer.addEventListener('mouseenter', () => {
-    if (window.pageYOffset > 100) {
-        clearTimeout(hoverTimeout);
-        navbarContainer.classList.remove('compact');
-    }
-});
-
-navbarContainer.addEventListener('mouseleave', () => {
-    if (window.pageYOffset > 100) {
-        hoverTimeout = setTimeout(() => {
-            navbarContainer.classList.add('compact');
-        }, 300);
-    }
-});
+// Navbar tidak mengecil saat scroll
+// Kode scroll effect dinonaktifkan
 
 // Mobile Menu Toggle
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
